@@ -25,10 +25,14 @@ This project collects, processes, and analyzes match data from the Riot Games AP
    ```
    pip install -r requirements.txt
    ```
-3. Update the API_KEY in `the_collector.py` with your Riot Games API key
+3. Update the API_KEY in `config.py` with your Riot Games API key
 4. Run the collector to gather match data:
    ```
    python the_collector.py
+   ```
+5. Run the data processor to convert raw data to structured formats:
+   ```
+   python data_processor.py
    ```
 
 ## How It Works

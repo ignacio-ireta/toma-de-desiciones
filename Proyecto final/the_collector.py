@@ -8,6 +8,12 @@ from requests import Session, HTTPError, ConnectionError, Timeout, TooManyRedire
 from urllib3.exceptions import ProtocolError, ReadTimeoutError
 from tqdm import tqdm
 
+from config import (
+    API_KEY, THRESHOLD, PAUSE_BETW, CHECKPOINT_FREQ, MAX_RETRIES, BASE_TIMEOUT,
+    PLAYERS_FILE, GAMES_FILE, TIMELINE_FILE, FAILED_MATCHES_FILE,
+    QUEUES, TIERS, DIVISIONS
+)
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
@@ -17,21 +23,11 @@ logging.basicConfig(
     ]
 )
 
-queues     = ['RANKED_SOLO_5x5']
-tiers      = ['MASTER', 'GRANDMASTER', 'CHALLENGER']
-divisions  = ['I', 'II', 'III', 'IV']
-API_KEY    = "RGAPI-XXXXX-XXXX-XXXX-XXXX-XXXXXXX"
-THRESHOLD  = 1
-PAUSE_BETW = 0.25
-CHECKPOINT_FREQ = 25
-MAX_RETRIES = 5
-BASE_TIMEOUT = 10
-
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-players_file   = os.path.join(BASE_DIR, "players_puuids.json")
-games_file     = os.path.join(BASE_DIR, "latest_games.json")
-timeline_file  = os.path.join(BASE_DIR, "matches_timeline.json")
-failed_matches_file = os.path.join(BASE_DIR, "failed_matches.json")
+players_file   = os.path.join(BASE_DIR, PLAYERS_FILE)
+games_file     = os.path.join(BASE_DIR, GAMES_FILE)
+timeline_file  = os.path.join(BASE_DIR, TIMELINE_FILE)
+failed_matches_file = os.path.join(BASE_DIR, FAILED_MATCHES_FILE)
 
 adapter = requests.adapters.HTTPAdapter(
     max_retries=0,
@@ -148,7 +144,7 @@ def save_checkpoint(file_path, data):
 
 players_puuids = load_or_create_file(players_file)
 failed_matches = load_or_create_file(failed_matches_file)
-combos = [(q, t, d) for q in queues for t in tiers for d in divisions]
+combos = [(q, t, d) for q in QUEUES for t in TIERS for d in DIVISIONS]
 
 try:
     with tqdm(combos, desc="Fetching league entries", unit="req", 

@@ -42,6 +42,12 @@ class MatchProcessor:
             return None
             
         team_id = team['teamId']
+
+        if 'win' not in team:
+            print(f"Warning: Team in game {game_id} missing 'win' - skipping")
+            return None
+            
+        team_win = team['win']
         
         if 'bans' not in team or not isinstance(team['bans'], list):
             print(f"Warning: Team {team_id} in game {game_id} has invalid 'bans' data")
@@ -71,7 +77,7 @@ class MatchProcessor:
                 print(f"Error processing objectives for team {team_id} in game {game_id}: {e}")
                 objectives = [False, 0] * 7
         
-        return [game_id, team_id, game_duration] + bans + objectives
+        return [game_id, team_id, team_win, game_duration] + bans + objectives
     
     def extract_player_data(self, game_id: int, player: Dict) -> List:
         player_data = [game_id]

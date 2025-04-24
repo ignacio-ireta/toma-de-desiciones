@@ -2,6 +2,25 @@ INPUT_FILE = "matches_data.json"
 PLAYERS_OUTPUT = "players_data.parquet"
 MATCHES_OUTPUT = "matches_data.parquet"
 
+# Collector configuration
+API_KEY = "RGAPI-XXXXX-XXXX-XXXX-XXXX-XXXXXXX"  # Replace with your actual API key
+THRESHOLD = 1
+PAUSE_BETW = 0.25
+CHECKPOINT_FREQ = 25
+MAX_RETRIES = 5
+BASE_TIMEOUT = 10
+
+# File paths for collector
+PLAYERS_FILE = "players_puuids.json"
+GAMES_FILE = "latest_games.json"
+TIMELINE_FILE = "matches_timeline.json"
+FAILED_MATCHES_FILE = "failed_matches.json"
+
+# API configuration
+QUEUES = ['RANKED_SOLO_5x5']
+TIERS = ['MASTER', 'GRANDMASTER', 'CHALLENGER']
+DIVISIONS = ['I', 'II', 'III', 'IV']
+
 UNWANTED_STATS = [
     'PlayerScore0', 'PlayerScore1', 'PlayerScore10', 'PlayerScore11', 'PlayerScore2', 
     'PlayerScore3', 'PlayerScore4', 'PlayerScore5', 'PlayerScore6', 'PlayerScore7', 
@@ -11,7 +30,7 @@ UNWANTED_STATS = [
 ]
 
 MATCHES_COLUMNS = [
-    'gameId', 'teamId', 'gameDuration', 'ban1', 'ban2', 'ban3', 'ban4', 'ban5', 
+    'gameId', 'teamId', 'win', 'gameDuration', 'ban1', 'ban2', 'ban3', 'ban4', 'ban5', 
     'atakhanFirst', 'atakhanKills', 'baronFirst', 'baronKills', 'championFirst', 
     'championKills', 'dragonFirst', 'dragonKills', 'hordeFirst', 'hordeKills', 
     'inhibitorFirst', 'inhibitorKills', 'riftHeraldFirst', 'riftHeraldKills', 
