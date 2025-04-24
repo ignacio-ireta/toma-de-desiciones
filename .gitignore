@@ -172,3 +172,8 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Data files
+Proyecto final/matches_data.json
+Proyecto final/matches_data.parquet
+Proyecto final/players_data.parquet
